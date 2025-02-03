@@ -51,7 +51,7 @@ $(document).ready(() => {
         headers: {
           Authorization: `Bearer ${streamElementsToken}`,
         },
-        complete: () => {
+        success: () => {
           createQueueInterval();
           $input.val("");
         },
