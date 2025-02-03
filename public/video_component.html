@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SE Song Request Queue Video Component</title>
+    <title>SE Song Request Queue Viewer Page</title>
   </head>
   <style>
     :root {
@@ -29,8 +29,7 @@
 
     .logo {
       width: 100%;
-      height: 40px;
-      margin-bottom: 1rem;
+      height: 100px;
       filter: invert(1);
     }
 
@@ -45,25 +44,25 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
-      padding: 1rem;
-      gap: 1rem;
     }
 
     .extension.loading #now-playing {
       display: none;
     }
 
-    .now-playing-container {
+    .now-playing-container,
+    .queue-container {
+      padding-inline: 1rem;
       margin-bottom: 1rem;
     }
 
-    .now-playing-title {
+    .now-playing-title,
+    .queue-title {
       margin-bottom: 1rem;
     }
 
     .song {
       display: flex;
-      padding: 0.5rem;
       transition: all 200ms;
       border: 1px transparent solid;
       border-radius: 15px;
@@ -77,6 +76,7 @@
       width: 100%;
       height: 100%;
       justify-content: start;
+      padding: 0.5rem;
       gap: 1rem;
       align-items: center;
       display: flex;
@@ -113,12 +113,64 @@
       padding: 0px;
     }
 
-    .queue-list .song {
-      margin-top: 1rem;
+    #request-form {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #18181b;
+      padding: 1rem;
+      margin-top: auto;
     }
 
-    .queue-list .song:last-of-type {
-      margin-bottom: 1rem;
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: start;
+      position: relative;
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      background-color: #2c2c2c;
+      outline: none;
+      color: white;
+      font-family: Helvetica, sans-serif;
+      padding: 0.5rem 1rem;
+      padding-right: 2.75rem;
+      font-size: medium;
+      border-radius: 15px;
+      height: 45px;
+      border: 2px solid transparent;
+      transition: all 300ms ease;
+    }
+
+    input:focus {
+      border-color: #b4b4b4;
+    }
+
+    input.error {
+      border-color: #bc2e30;
+      color: #bc2e30;
+    }
+
+    .send-btn {
+      position: absolute;
+      right: 7.25px;
+      bottom: 7.5px;
+      cursor: pointer;
+      color: whitesmoke;
+      background-color: #bc2e30;
+      border-radius: 10px;
+      aspect-ratio: 1/1;
+      outline: none;
+      border: none;
+    }
+
+    .status {
+      color: gray;
     }
   </style>
   <body>
@@ -130,10 +182,10 @@
       >
         <img src="../img/logo.png" alt="tune-in-logo" />
       </a>
-      <div class="music-container">
+      <div class="song-container">
         <div class="now-playing-container">
           <div class="now-playing-title">Now playing:</div>
-          <div class="now-playing-status">Loading playing song...</div>
+          <div class="now-playing-status status">Loading playing song...</div>
           <div id="now-playing" class="song">
             <!-- song -->
           </div>
@@ -141,23 +193,27 @@
 
         <div class="queue-container">
           <div class="queue-title">Next songs:</div>
-          <div class="queue-status">Loading media queue...</div>
+          <div class="queue-status status">Loading media queue...</div>
           <ul class="queue-list">
             <!-- <li:songs/> -->
           </ul>
         </div>
       </div>
 
-      <!-- <form id="song-form">
+      <form id="request-form">
         <div class="input-group">
-          <label to="song-selector">Song selector</label>
+          <label for="song-selector">Song request</label>
           <input
             id="song-selector"
-            placeholder="Search, YouTube link or YouTube ID"
+            placeholder="YouTube link or YouTube ID"
             type="text"
           />
+          <button class="send-btn" type="submit">
+            <!-- prettier-ignore -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
+          </button>
         </div>
-      </form> -->
+      </form>
     </div>
 
     <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
