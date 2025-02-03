@@ -14,6 +14,13 @@ twitch.configuration.onChanged(() => {
       if (typeof config === "object") {
         $("#account-id").val(config.streamElementsId);
         $("#jwt-token").val(config.streamElementsToken);
+
+        const $makeRequest = $("#make-request");
+        if (config.makeRequest === null || config.makeRequest === undefined) {
+          $makeRequest.prop("checked", true);
+        } else {
+          $makeRequest.prop("checked", config.makeRequest);
+        }
       }
     } catch (err) {
       console.error("Invalid config.");
@@ -39,6 +46,7 @@ $(function () {
 
     const streamElementsId = $("#account-id").val().trim();
     const streamElementsToken = $("#jwt-token").val().trim();
+    const makeRequest = $("#make-request").prop("checked");
 
     if (streamElementsId && streamElementsToken) {
       $("#status").removeClass("error success");
@@ -47,7 +55,7 @@ $(function () {
         twitch.configuration.set(
           "broadcaster",
           "1.0",
-          JSON.stringify({ streamElementsId, streamElementsToken })
+          JSON.stringify({ streamElementsId, streamElementsToken, makeRequest })
         );
         $("#status").addClass("success").text("Success.");
       } catch (err) {

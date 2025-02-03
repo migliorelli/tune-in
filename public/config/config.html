@@ -61,7 +61,7 @@
       position: relative;
     }
 
-    input {
+    input:not([type="checkbox"], [type="radio"]) {
       width: 100%;
       background-color: #2c2c2c;
       width: 300px;
@@ -79,6 +79,47 @@
 
     input:focus {
       border-color: #b4b4b4;
+    }
+
+    #make-request {
+      display: none;
+    }
+
+    .checkbox-group {
+      display: flex;
+      justify-content: start;
+      width: 100%;
+      align-items: center;
+    }
+
+    label[for="make-request"] {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    label[for="make-request"] .marker {
+      background-color: white;
+      border-radius: 8px;
+      height: 25px;
+      width: 25px;
+      display: grid;
+      place-items: center;
+    }
+
+    label[for="make-request"] .marker svg {
+      display: none;
+    }
+
+    #make-request:checked + label[for="make-request"] .marker {
+      background-color: #bc2e30;
+    }
+
+    #make-request:checked + label[for="make-request"] .marker svg {
+      display: block;
     }
 
     .info {
@@ -128,7 +169,7 @@
       </a>
       <form id="id-form">
         <div class="input-group">
-          <label for="account-id">Account ID</label>
+          <label for="account-id">Stream Elements Account ID</label>
           <input id="account-id" type="text" />
           <!-- <div role="button" class="paste-btn" id="paste-account-id"> -->
           <!-- prettier-ignore -->
@@ -136,7 +177,7 @@
           <!-- </div> -->
         </div>
         <div class="input-group">
-          <label for="jwt-token">JWT Token</label>
+          <label for="jwt-token">Stream Elements JWT Token</label>
           <input id="jwt-token" type="text" />
           <!-- <div role="button" class="paste-btn" id="paste-jwt-token"> -->
           <!-- prettier-ignore -->
@@ -151,6 +192,17 @@
             target="_blank"
             >your account's channel dashboard</a
           >
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="make-request" />
+          <label for="make-request">
+            <div class="marker">
+              <!-- prettier-ignore -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <span> Make requests via panel </span>
+          </label>
         </div>
 
         <button type="submit" class="btn">Save</button>

@@ -1,4 +1,9 @@
-let userId, token, streamElementsId, streamElementsToken, queueInterval;
+let userId,
+  token,
+  streamElementsId,
+  streamElementsToken,
+  makeRequest,
+  queueInterval;
 const twitch = window.Twitch.ext;
 
 twitch.onAuthorized((auth) => {
@@ -14,6 +19,13 @@ twitch.configuration.onChanged(() => {
       if (typeof config === "object") {
         streamElementsId = config.streamElementsId;
         streamElementsToken = config.streamElementsToken;
+
+        makeRequest =
+          config.makeRequest === null || config.makeRequest === undefined
+            ? true
+            : config.makeRequest;
+
+        $("#request-form").toggle(makeRequest);
         createQueueInterval();
       }
     } catch (err) {
@@ -26,6 +38,7 @@ $(document).ready(() => {
   const $formContainer = $("#request-form");
   const $input = $("#song-selector");
 
+  $formContainer.toggle(makeRequest);
   $formContainer.submit((e) => {
     e.preventDefault();
     const video = $input.val().trim();
