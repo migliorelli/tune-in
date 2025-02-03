@@ -1,0 +1,9 @@
+{
+  "name": "tune-in",
+  "version": "0.0.1",
+  "description": "An extension to show the current Sream Elements media request queue.",
+  "scripts": {},
+  "keywords": [],
+  "author": "Miguel Migliorelli Bringhenti",
+  "license": "MIT"
+}
