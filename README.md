@@ -2,7 +2,7 @@
 
 TuneIn is a Twitch extension that enhances your media request experience by displaying the current queue in real time. Whether you're a streamer or a viewer, stay in sync with the requested songs and videos, ensuring a seamless and engaging streaming session. Keep the vibes flowing and never miss a beat with TuneIn!
 
-> Unfortunately it was rejected by Twitch because it encourages the streamer to listen to stream music
+> Unfortunately it was rejected by Twitch because it encourages the streamer to stream music
 
 ## Features
 
